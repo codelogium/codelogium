@@ -24,8 +24,6 @@ public class FactoryApplication {
 		// Print the value of the `name` property of the `MyBean` instance to the console
 		System.out.println(bean.getName());
 		System.out.println(instactionFactory.getName());
-		
-
 
         // Close the application context to release resources and clean up
 		context.close();
