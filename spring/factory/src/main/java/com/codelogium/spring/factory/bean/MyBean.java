@@ -1,0 +1,38 @@
+package com.codelogium.spring.factory.bean;
+
+/*
+ * The Factory Design Pattern is a creational design pattern used to abstract the instantiation logic of objects. It provides a way to create objects without exposing the creation logic to the client, instead using a common interface or abstract method to instantiate and return objects.
+ * 
+*/
+
+public class MyBean {
+    private String name;
+
+    private MyBean(String name) {
+        this.name = name;
+    }
+
+    /*
+     * Static factory method responsible for creating and initializing a MyBean
+     * instance
+     * The factory method pattern is used here, allowing centralized control over
+     * the creation logic.
+     */
+    public static MyBean createInstance() {
+        return new MyBean("Created via static Factory method");
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public MyBean name(String name) {
+        setName(name);
+        return this;
+    }
+
+}
