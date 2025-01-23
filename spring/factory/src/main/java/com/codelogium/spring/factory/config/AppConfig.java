@@ -3,7 +3,8 @@ package com.codelogium.spring.factory.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.codelogium.spring.factory.bean.MyBean;
+import com.codelogium.spring.factory.beans.MyBean;
+import com.codelogium.spring.factory.beans.MyBeanFactory;
 
 @Configuration
 public class AppConfig {
@@ -29,4 +30,27 @@ public class AppConfig {
     public MyBean myBean() {
         return MyBean.createInstance(); // call the static Factory method
     }
+
+    // The Factory class needs to be configured as a bean itself before it can be used
+    @Bean
+    public MyFactory MyFactory() {
+        return new MyFactory();
+    }
+
+    // Bean Instatiation using the Factory class which call th 
+    @Bean
+    public MyBeanFactory myBeanFactory(MyFactory myFactory) {
+       return myFactory.createInstance();
+    }
+
+    public class MyFactory {
+        public MyBeanFactory createInstance() {
+            MyBeanFactory mybeanFactory = new MyBeanFactory(); // Call the constructor inside the factory
+            mybeanFactory.setName("Created using Instantiation Bean");
+            return mybeanFactory;
+        }
+        
+    }
 }
+
+

@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import com.codelogium.spring.factory.bean.MyBean;
+import com.codelogium.spring.factory.beans.MyBean;
+import com.codelogium.spring.factory.beans.MyBeanFactory;
 import com.codelogium.spring.factory.config.AppConfig;
 
 @SpringBootApplication
@@ -18,11 +19,12 @@ public class FactoryApplication {
 		
 		// Retrieve a bean of type `MyBean` from the application context
 		MyBean bean = context.getBean(MyBean.class);
+		MyBeanFactory instactionFactory = context.getBean(MyBeanFactory.class);
 		
 		// Print the value of the `name` property of the `MyBean` instance to the console
-		System.out.println(bean.getName() + "\n---------------------");
-		bean.setName("\nUpdated after bean creation");
 		System.out.println(bean.getName());
+		System.out.println(instactionFactory.getName());
+		
 
 
         // Close the application context to release resources and clean up
