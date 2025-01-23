@@ -37,7 +37,7 @@ public class AppConfig {
         return new MyFactory();
     }
 
-    // Bean Instatiation using the Factory class which call th 
+    //Use the Factory Bean to create MyBeanFactory instance
     @Bean
     public MyBeanFactory myBeanFactory(MyFactory myFactory) {
        return myFactory.createInstance();
@@ -46,7 +46,7 @@ public class AppConfig {
     public class MyFactory {
         public MyBeanFactory createInstance() {
             MyBeanFactory mybeanFactory = new MyBeanFactory(); // Call the constructor inside the factory
-            mybeanFactory.setName("Created using Instantiation Bean");
+            mybeanFactory.setName("Created using Factory Instance");
             return mybeanFactory;
         }
         
