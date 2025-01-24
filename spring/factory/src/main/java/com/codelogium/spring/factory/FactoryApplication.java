@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.codelogium.spring.factory.beans.MyBean;
-import com.codelogium.spring.factory.beans.MyBeanFactory;
+import com.codelogium.spring.factory.beans.InstanceFactory;
 import com.codelogium.spring.factory.config.AppConfig;
 
 @SpringBootApplication
@@ -19,7 +19,7 @@ public class FactoryApplication {
 		
 		// Retrieve a bean of type `MyBean` from the application context
 		MyBean bean = context.getBean(MyBean.class);
-		MyBeanFactory instactionFactory = context.getBean(MyBeanFactory.class);
+		InstanceFactory instactionFactory = context.getBean(InstanceFactory.class);
 		
 		// Print the value of the `name` property of the `MyBean` instance to the console
 		System.out.println(bean.getName());

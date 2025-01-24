@@ -21,6 +21,8 @@ public class MyBean {
      * instance
      * The factory method pattern is used here, allowing centralized control over
      * the creation logic.
+     * 
+     * A factory method is a method that creates and returns an instance of a bean. Instead of relying on a constructor to instantiate a class, you can use a factory method to control how and when the object is created.
      */
     public static MyBean createInstance() {
         return new MyBean("Created via static Factory method");

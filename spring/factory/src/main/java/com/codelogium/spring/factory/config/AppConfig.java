@@ -1,12 +1,14 @@
 package com.codelogium.spring.factory.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.codelogium.spring.factory.beans.MyBean;
-import com.codelogium.spring.factory.beans.MyBeanFactory;
+import com.codelogium.spring.factory.beans.InstanceFactory;
 
 @Configuration
+// @ComponentScan(basePackages = "com.example.demo") // Scans the specified package
 public class AppConfig {
 
     /**
@@ -18,7 +20,7 @@ public class AppConfig {
      * 
      * This method uses a static factory method (`createInstance`) to create and initialize an instance of MyBean instead of directly invoking the constructor.
      * 
-     * The returned MyBean instance is automatically registered as a Spring bean with the name myBean
+     * The returned MyBean instance is automatically REGISTERED as a Spring bean with the name myBean
      * 
      * Benefits of this approach:
      * 1. Centralized Creation Logic: The factory method encapsulates the creation and initialization logic, allowing you to modify the object creation without changing client code.
@@ -39,13 +41,14 @@ public class AppConfig {
 
     //Use the Factory Bean to create MyBeanFactory instance
     @Bean
-    public MyBeanFactory myBeanFactory(MyFactory myFactory) {
+    public InstanceFactory myBeanFactory(MyFactory myFactory) {
        return myFactory.createInstance();
     }
 
     public class MyFactory {
-        public MyBeanFactory createInstance() {
-            MyBeanFactory mybeanFactory = new MyBeanFactory(); // Call the constructor inside the factory
+        //
+        public InstanceFactory createInstance() {
+            InstanceFactory mybeanFactory = new InstanceFactory(); // Call the constructor inside the factory
             mybeanFactory.setName("Created using Factory Instance");
             return mybeanFactory;
         }
