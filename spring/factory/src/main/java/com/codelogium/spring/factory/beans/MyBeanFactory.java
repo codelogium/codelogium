@@ -14,14 +14,14 @@ public class MyBeanFactory implements FactoryBean<MyBean> {
 
     @Override
     public MyBean getObject() throws Exception {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getObject'");
+        MyBean myBean = new MyBean();
+        myBean.setName("Created by FactoryBean special-spring interface, using its getObject()");
+        return myBean;
     }
 
     @Override
     public Class<?> getObjectType() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getObjectType'");
+        return MyBean.class;
     }
     
 }
