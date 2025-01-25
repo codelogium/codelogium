@@ -23,9 +23,11 @@ public class FactoryApplication {
 		MyBeanFactory myBeanFactory = context.getBean(MyBeanFactory.class);
 		MyBeanFactory factoryBeanItsefl = (MyBeanFactory) context.getBean("&MyBeanFactory");
 
+
 		MyBean beanFactory = null;
+		//getObject() throws excetion
 		try {
-			beanFactory = myBeanFactory.getObject();
+			beanFactory = myBeanFactory.getObject(); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
