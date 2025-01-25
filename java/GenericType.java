@@ -8,7 +8,14 @@ public class GenericType {
         public void setItem(T item) { this.item = item; }
     }
 
-    
+    // Generic Method
+    public static class Utility {
+    public static <T> void printArray(T[] array) {
+        for(T element : array) {
+            System.out.println(element);
+        }
+    }
+}
 
     //Main Method
     public static void main(String[] args) {
@@ -24,6 +31,12 @@ public class GenericType {
         Box<Integer> integerBox = outerInstance.new Box<>();
         integerBox.setItem(4321);
         System.out.println(integerBox.getItem());
+
+        //Generic Method
+        String[] names = {"Alice", "Bob"};
+        Integer[] numbers = {1, 2, 4};
+        Utility.printArray(names);
+        Utility.printArray(numbers);
 
     }
 }
