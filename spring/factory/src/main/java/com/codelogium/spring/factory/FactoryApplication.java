@@ -37,7 +37,9 @@ public class FactoryApplication {
 		System.out.println(beanFactory.getName());
 		System.out.println("The bean used in the FactoryBean interface is : " + myBeanFactory.getObjectType().getSimpleName());
 
-        // Close the application context to release resources and clean up		context.close();
+        // Close the application context to release resources and clean up		
+		context.close();
+
 
 		SpringApplication.run(FactoryApplication.class, args);
 	}
