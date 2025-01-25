@@ -2,10 +2,10 @@ package com.codelogium.spring.factory.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 import com.codelogium.spring.factory.beans.MyBean;
 import com.codelogium.spring.factory.beans.MyBeanFactory;
-import com.codelogium.spring.factory.beans.InstanceFactory;
 
 @Configuration
 // @ComponentScan(basePackages = "com.example.demo") // Scans the specified package
@@ -27,8 +27,10 @@ public class AppConfig {
      * 2. Flexibility: The factory method can return different objects or pre-configured instances, depending on application requirements.
      * 3. Consistent Initialization: Ensures all beans of this type are initialized in a controlled and consistent way.
      * 
+     * Without @Primary: If you have multiple beans of the same type, Spring will not know which one to inject and will throw an exception like NoUniqueBeanDefinitionException, because it finds more than one match. The @Qualifier annotation can help resolve this conflict by explicitly specifying which bean to inject.
      */
-    @Bean
+    @Bean(name="StaticBean")
+    @Primary //Mark static creation as the default and whenever Spring encounter a dependency injection, it will use this one
     public MyBean myBean() {
         return MyBean.createInstance(); // call the static Factory method
     }
@@ -40,21 +42,21 @@ public class AppConfig {
     }
 
     //Use the Factory Bean to create MyBeanFactory instance
-    @Bean
-    public InstanceFactory myInstanceBeanFactory(MyFactory myFactory) {
+    @Bean(name = "InstanceFactory")
+    public MyBean myInstanceBeanFactory(MyFactory myFactory) {
        return myFactory.createInstance();
     }
 
     // Using MyBeanFactory which implements FactoryBean specialized interface, it takes care of the bean cration and all.
-    @Bean
+    @Bean(name="MyBeanFactory")
     public MyBeanFactory myBeanFactory() {
         return new MyBeanFactory();
     }
 
     public class MyFactory {
         //
-        public InstanceFactory createInstance() {
-            InstanceFactory mybeanFactory = new InstanceFactory(); // Call the constructor inside the factory
+        public MyBean createInstance() {
+            MyBean mybeanFactory = new MyBean(); // Call the constructor inside the factory
             mybeanFactory.setName("Created using Factory Instance");
             return mybeanFactory;
         }

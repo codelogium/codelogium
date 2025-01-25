@@ -6,8 +6,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.codelogium.spring.factory.beans.MyBean;
 import com.codelogium.spring.factory.beans.MyBeanFactory;
-import com.codelogium.spring.factory.beans.BeanFactory;
-import com.codelogium.spring.factory.beans.InstanceFactory;
 import com.codelogium.spring.factory.config.AppConfig;
 
 @SpringBootApplication
@@ -21,10 +19,11 @@ public class FactoryApplication {
 		
 		// Retrieve a bean of type `MyBean` from the application context
 		MyBean bean = context.getBean(MyBean.class);
-		InstanceFactory instactionFactory = context.getBean(InstanceFactory.class);
+		MyBean instactionFactory = (MyBean) context.getBean("InstanceFactory");
 		MyBeanFactory myBeanFactory = context.getBean(MyBeanFactory.class);
+		MyBeanFactory factoryBeanItsefl = (MyBeanFactory) context.getBean("&MyBeanFactory");
 
-		BeanFactory beanFactory = null;
+		MyBean beanFactory = null;
 		try {
 			beanFactory = myBeanFactory.getObject();
 		} catch (Exception e) {
@@ -35,6 +34,7 @@ public class FactoryApplication {
 		System.out.println(bean.getName());
 		System.out.println(instactionFactory.getName());
 		System.out.println(beanFactory.getName());
+		System.out.println("The Factory Bean that used the spring interface is : " + factoryBeanItsefl.getClass().getName());
 		System.out.println("The bean used in the FactoryBean interface is : " + myBeanFactory.getObjectType().getSimpleName());
 
         // Close the application context to release resources and clean up		

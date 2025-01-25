@@ -10,18 +10,18 @@ A class that implements FactoryBean<T> is itself a Spring bean, but its primary 
 Allows for advanced customization, such as creating a proxy object or dynamically determining the object to be returned.
 The getObject() method in the FactoryBean implementation is called by Spring to create the actual bean.
  */
-public class MyBeanFactory implements FactoryBean<BeanFactory> {
+public class MyBeanFactory implements FactoryBean<MyBean> {
 
     @Override
-    public BeanFactory getObject() throws Exception {
-        BeanFactory beanFactory = new BeanFactory();
+    public MyBean getObject() throws Exception {
+        MyBean beanFactory = new MyBean();
         beanFactory.setName("Created by FactoryBean special-spring interface, using its getObject()");
         return beanFactory;
     }
 
     @Override
     public Class<?> getObjectType() {
-        return BeanFactory.class;
+        return MyBean.class;
     }
     
 }
