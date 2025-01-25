@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.codelogium.spring.factory.beans.MyBean;
+import com.codelogium.spring.factory.beans.MyBeanFactory;
 import com.codelogium.spring.factory.beans.InstanceFactory;
 
 @Configuration
@@ -25,8 +26,8 @@ public class AppConfig {
      * 1. Centralized Creation Logic: The factory method encapsulates the creation and initialization logic, allowing you to modify the object creation without changing client code.
      * 2. Flexibility: The factory method can return different objects or pre-configured instances, depending on application requirements.
      * 3. Consistent Initialization: Ensures all beans of this type are initialized in a controlled and consistent way.
+     * 
      */
-    
     @Bean
     public MyBean myBean() {
         return MyBean.createInstance(); // call the static Factory method
@@ -40,8 +41,14 @@ public class AppConfig {
 
     //Use the Factory Bean to create MyBeanFactory instance
     @Bean
-    public InstanceFactory myBeanFactory(MyFactory myFactory) {
+    public InstanceFactory myInstanceBeanFactory(MyFactory myFactory) {
        return myFactory.createInstance();
+    }
+
+    // Using MyBeanFactory which implements FactoryBean specialized interface, it takes care of the bean cration and all.
+    @Bean
+    public MyBeanFactory myBeanFactory() {
+        return new MyBeanFactory();
     }
 
     public class MyFactory {
