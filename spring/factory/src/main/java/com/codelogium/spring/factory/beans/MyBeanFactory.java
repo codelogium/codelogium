@@ -21,7 +21,7 @@ public class MyBeanFactory implements FactoryBean<BeanFactory> {
 
     @Override
     public Class<?> getObjectType() {
-        return MyBean.class;
+        return BeanFactory.class;
     }
     
 }
