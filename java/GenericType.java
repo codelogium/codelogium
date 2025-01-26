@@ -92,7 +92,8 @@ public class GenericType {
      * The class can operate on objects of any type specified when the class is
      * instantiated, rather than being tied to a specific type.
      * E is a placeholder for the type you will specify later when using the class.
-     * Java needs <E> in the class definition to treat E as a valid type parameter. Otherwise, it assumes E is a class or type that hasn't been defined.
+     * Java needs <E> in the class definition to treat E as a valid type parameter.
+     * Otherwise, it assumes E is a class or type that hasn't been defined.
      */
     public class CustomList<E> {
         private List<E> elements = new ArrayList<>();
@@ -106,7 +107,7 @@ public class GenericType {
         }
     }
 
-    //Using K (Key) and V (Value) in a Custom Key-Value Pair
+    // Using K (Key) and V (Value) in a Custom Key-Value Pair
     public static class KeyValue<K, V> {
         private K key;
         private V value;
@@ -116,10 +117,57 @@ public class GenericType {
             this.value = value;
         }
 
-        public K getKey() { return key; }
-        public V getValue() { return value; }
-        public void setKey(K key) { this.key = key; }
-        public void setValue(V value) { this.value = value; }
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public void setKey(K key) {
+            this.key = key;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+    }
+
+    // Combining E, K, and V in a Multi-Generic Class
+    public static class MultiMap<K, V, E> {
+        private E extra;
+        private K key;
+        private V value;
+
+        public void put(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return this.key;
+        }
+
+        public V getValue() {
+            return this.value;
+        }
+
+        public E getExtra() {
+            return this.extra;
+        }
+
+        public void setKey(K key) {
+            this.key = key;
+        }
+
+        public void setValue(V value) {
+            this.value = value;
+        }
+
+        public void setExtra(E extra) {
+            this.extra = extra;
+        }
     }
 
     // Main Method
@@ -177,6 +225,15 @@ public class GenericType {
 
         KeyValue<String, Integer> ageMapping = new KeyValue<>("Akmal Eddine", 16);
         System.out.println(ageMapping.getKey() + " is " + ageMapping.getValue() + " years old");
+
+        // Combining E, K, and V in a Multi-Generic Class
+        MultiMap<String, Integer, String> fruitInfo = new MultiMap<>();
+        fruitInfo.put("Banana", 10);
+        fruitInfo.setExtra("imported from Morocco");
+
+        System.out.println("The " + fruitInfo.getKey() + " is " + fruitInfo.getValue() + " MAD and is " + fruitInfo.getExtra());
+
+
         
     }
 }
