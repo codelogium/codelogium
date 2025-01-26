@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.List;
 
+/*
+ * Generics are a way to create type-safe and reusable code by allowing you to define type parameters. They help avoid runtime errors, improve readability, and reduce boilerplate code, especially in collections, methods, and custom classes or interfaces.
+ */
 public class GenericType {
 
     // Generic Class
@@ -105,5 +109,13 @@ public class GenericType {
 
         userRepo.save(user);
         System.out.println("\n" + userRepo.findByIndex(0).getUsername());
+
+        // Generic in Java Collection
+        List<String> list = new ArrayList<>();
+        list.add("Hello");
+        String value = list.get(0); // No Casting needed
+        String value2 = (String) list.get(0); // without Generic, it would require casting with exception handling ...
+        System.out.println(value);
+        System.out.println("\""+ value2 + "\"" + " is printed using String value2 = (String) list.get(0); //Casting used before Generics were introduced");
     }
 }
