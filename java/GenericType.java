@@ -92,6 +92,7 @@ public class GenericType {
      * The class can operate on objects of any type specified when the class is
      * instantiated, rather than being tied to a specific type.
      * E is a placeholder for the type you will specify later when using the class.
+     * Java needs <E> in the class definition to treat E as a valid type parameter. Otherwise, it assumes E is a class or type that hasn't been defined.
      */
     public class CustomList<E> {
         private List<E> elements = new ArrayList<>();
@@ -103,6 +104,22 @@ public class GenericType {
         public E getElement(int index) {
             return this.elements.get(index);
         }
+    }
+
+    //Using K (Key) and V (Value) in a Custom Key-Value Pair
+    public static class KeyValue<K, V> {
+        private K key;
+        private V value;
+
+        public KeyValue(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() { return key; }
+        public V getValue() { return value; }
+        public void setKey(K key) { this.key = key; }
+        public void setValue(V value) { this.value = value; }
     }
 
     // Main Method
@@ -153,5 +170,13 @@ public class GenericType {
         customIntegerList.setElement(20);
         customIntegerList.setElement(15);
         System.out.println("The price of an " + customStringList.getElement(0) + " is " + customIntegerList.getElement(0) + " while the price of an " + customStringList.getElement(1) + " is " + customIntegerList.getElement(1));
+
+        //Using K, V
+        KeyValue<Integer, String> productPriceMapping = new KeyValue<>(38500, "ASUS ProArt 16");
+        System.err.println("The Model " + productPriceMapping.getValue() + " cost " + productPriceMapping.getKey() + "MAD");
+
+        KeyValue<String, Integer> ageMapping = new KeyValue<>("Akmal Eddine", 16);
+        System.out.println(ageMapping.getKey() + " is " + ageMapping.getValue() + " years old");
+        
     }
 }
