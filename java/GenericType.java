@@ -30,9 +30,16 @@ public class GenericType {
 
     // Generic Interface
     /*
-     * it's an interesting and sometimes subtle aspect of Java! Even if you don’t explicitly use the static keyword, any interface declared inside a class is implicitly static by definition.
-
-    This means you can reference it without creating an instance of the enclosing class, and it behaves independently of any specific instance of the outer class.
+     * it's an interesting and sometimes subtle aspect of Java! Even if you don’t
+     * explicitly use the static keyword, any interface declared inside a class is
+     * implicitly static by definition.
+     * 
+     * This means you can reference it without creating an instance of the enclosing
+     * class, and it behaves independently of any specific instance of the outer
+     * class.
+     * 
+     * Generics improve type safety and code reusability, ensuring compile-time
+     * checks and reducing runtime errors.
      */
     public interface InnerGenericType<T> {
         void save(T entity);
@@ -79,6 +86,25 @@ public class GenericType {
         }
     }
 
+    // Using E (Element) in a Custom Collection
+    /*
+     * Adding <E> in the class defintion defines the class as generic.
+     * The class can operate on objects of any type specified when the class is
+     * instantiated, rather than being tied to a specific type.
+     * E is a placeholder for the type you will specify later when using the class.
+     */
+    public class CustomList<E> {
+        private List<E> elements = new ArrayList<>();
+
+        public void setElement(E element) {
+            this.elements.add(element);
+        }
+
+        public E getElement(int index) {
+            return this.elements.get(index);
+        }
+    }
+
     // Main Method
     public static void main(String[] args) {
         // We need outer class in order to instantiate a inner class that is not static
@@ -116,6 +142,16 @@ public class GenericType {
         String value = list.get(0); // No Casting needed
         String value2 = (String) list.get(0); // without Generic, it would require casting with exception handling ...
         System.out.println(value);
-        System.out.println("\""+ value2 + "\"" + " is printed using String value2 = (String) list.get(0); //Casting used before Generics were introduced");
+        System.out.println("\""+ value2 + "\"" + " is printed using String value2 = (String) list.get(0); //Casting before Generics introduced");
+
+        // Using E element in a custom collection
+        CustomList<String> customStringList = outerInstance.new CustomList<>();
+        customStringList.setElement("Apple");
+        customStringList.setElement("Banana");
+
+        CustomList<Integer> customIntegerList = outerInstance.new CustomList<>();
+        customIntegerList.setElement(20);
+        customIntegerList.setElement(15);
+        System.out.println("The price of an " + customStringList.getElement(0) + " is " + customIntegerList.getElement(0) + " while the price of an " + customStringList.getElement(1) + " is " + customIntegerList.getElement(1));
     }
 }
