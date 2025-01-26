@@ -25,7 +25,12 @@ public class GenericType {
     }
 
     // Generic Interface
-    public static interface InnerGenericType<T> {
+    /*
+     * it's an interesting and sometimes subtle aspect of Java! Even if you don’t explicitly use the static keyword, any interface declared inside a class is implicitly static by definition.
+
+    This means you can reference it without creating an instance of the enclosing class, and it behaves independently of any specific instance of the outer class.
+     */
+    public interface InnerGenericType<T> {
         void save(T entity);
 
         T findByIndex(int id);
@@ -100,6 +105,5 @@ public class GenericType {
 
         userRepo.save(user);
         System.out.println("\n" + userRepo.findByIndex(0).getUsername());
-
     }
 }
